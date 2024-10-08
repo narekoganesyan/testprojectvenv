@@ -1,40 +1,39 @@
-# Определение класса
-class Car:
-    # Конструктор класса (__init__) для инициализации объектов
-    def __init__(self, brand, model, year):
-        self.brand = brand  # Атрибут марки автомобиля
-        self.model = model  # Атрибут модели автомобиля
-        self.year = year    # Атрибут года выпуска
+class Employee:
+    def __init__(self, name, salary, bonus):
+        self.name = name
+        self.salary = salary
+        self.bonus = bonus
+
+    def calculate_salary(self):
+        return self.salary // 100 * self.bonus
+
+    def __str__(self):
+        return (f'{self.__class__.__name__} {self.name}, оклад={self.salary}, максимальный процент'
+                f' бонуса={self.bonus}%, '
+                f'бонусы={self.calculate_salary()}руб, '
+                f'полная зарплата и бонусы={self.calculate_salary() + self.salary}рублей.')
 
 
-    # Метод для вывода информации о машине
-    def car_info(self):
-        return f'{self.year} {self.brand} {self.model}'
+class Cleaner(Employee):
+    def __init__(self, name):
+        super().__init__(name, 15000, 1)
 
 
-    # Метод для обновления года выпуска
-    def update_year(self, new_year):
-        self.year = new_year
-        return f'Год обновлен: {self.year}'
+class Manager(Employee):
+    def __init__(self, name):
+        super().__init__(name, 45000, 15)
 
 
-    # Метод для проверки возраста автомобиля
-    def car_age(self, current_year):
-        age = current_year - self.year
-        return f'Возраст машины: {age} лет'
+class Director(Employee):
+    def __init__(self, name):
+        super().__init__(name, 105000, 100)
 
 
-# Создание объекта класса Car
-my_car = Car("Toyota", "Corolla", 2015)
-
-
-# Вызов метода для получения информации о машине
-print(my_car.car_info())  # Вывод: 2015 Toyota Corolla
-
-
-# Обновление года выпуска
-print(my_car.update_year(2018))  # Вывод: Год обновлен: 2018
-
-
-# Проверка возраста автомобиля
-print(my_car.car_age(2024))  # Вывод: Возраст машины: 6 лет
+if __name__ == '__main__':
+    a = []
+    cleaner = Cleaner('Nina')
+    print(cleaner)
+    manager = Manager('Alex')
+    print(manager)
+    director = Director('Malik')
+    print(director)
